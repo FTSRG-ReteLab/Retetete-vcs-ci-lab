@@ -16,7 +16,7 @@ public class TrainSystem {
 	public TrainController getController() {
 		return controller;
 	}
-
+	//Conflict is meant to happen here.
 	public TrainSensor getSensor() {
 		return sensor;
 	}
