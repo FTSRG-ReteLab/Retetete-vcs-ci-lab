@@ -16,7 +16,7 @@ public class TrainSystem {
 	public TrainController getController() {
 		return controller;
 	}
-
+	//FUCK
 	public TrainSensor getSensor() {
 		return sensor;
 	}
