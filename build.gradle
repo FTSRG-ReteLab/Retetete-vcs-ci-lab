@@ -4,8 +4,4 @@ subprojects {
   repositories {
     jcenter()
    }
-dependecies {
-  compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
-   }
  }
-
