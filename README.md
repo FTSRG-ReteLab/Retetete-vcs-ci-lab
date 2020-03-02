@@ -21,7 +21,8 @@ To compile and run tests also execute:
 ```
 
 ## Overview
-
+ **Here is some bold text**. *And some italic text*. Here is a link to GitHub:
+[GitHub](http://github.com)
 ### Structure
 
 The application represents a simple train controller system with the following three components.
