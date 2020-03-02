@@ -24,5 +24,8 @@ public class TrainSystem {
 	public TrainUser getUser() {
 		return user;
 	}
-
+	public void setUser(TrainUser user_){
+	if(user_ == null){return;}
+	user = user_;
+	}
 }
