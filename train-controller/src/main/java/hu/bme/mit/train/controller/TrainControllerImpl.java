@@ -2,7 +2,9 @@ package hu.bme.mit.train.controller;
 
 import hu.bme.mit.train.interfaces.TrainController;
 
+ 
 import java.util.Timer;
+
 
 public class TrainControllerImpl extends Thread implements TrainController {
 
@@ -34,6 +36,13 @@ public class TrainControllerImpl extends Thread implements TrainController {
 		}
 
 		enforceSpeedLimit();
+	}
+
+	@Override
+	public void run() {
+		while(true){
+			followSpeed();
+		}
 	}
 
 	@Override
