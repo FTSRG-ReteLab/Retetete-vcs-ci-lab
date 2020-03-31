@@ -3,12 +3,16 @@ package hu.bme.mit.train.controller;
 import hu.bme.mit.train.interfaces.TrainController;
 
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public class TrainControllerImpl extends Thread implements TrainController {
 
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
+	private Logger logger = Logger.getLogger(TrainControllerImpl.class.getName());
 	private Timer timer;
 	@Override
 	public void run(){
@@ -16,7 +20,7 @@ public class TrainControllerImpl extends Thread implements TrainController {
 			try {
 				timer.wait(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.log(new LogRecord(Level.INFO,e.getStackTrace().toString()));
 			}
 			followSpeed();
 		}

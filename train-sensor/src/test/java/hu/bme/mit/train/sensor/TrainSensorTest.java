@@ -1,5 +1,6 @@
 package hu.bme.mit.train.sensor;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,29 +12,49 @@ import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.sensor.TrainSensorImpl;
 import hu.bme.mit.train.user.TrainUserImpl;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 
 public class TrainSensorTest {
+
 	 private TrainController controller ;
+
 	 private TrainUser user;
 	 private TrainSensor sensor;
-    @Before
+
+	 @Before
     public void before() {
-			controller= new TrainControllerImpl();
-			 user = new TrainUserImpl(controller);
+			controller= mock(TrainController.class);
+			 user = mock(TrainUser.class);
 			 sensor = new TrainSensorImpl(controller, user);
-			sensor.overrideSpeedLimit(50);
-}
 
-    @Test
-    public void ThisIsAnExampleTestStub() {
-        // TODO Delete this and add test cases based on the issues
-    }
-    @Test
+	 }
 
-	public void GettingSensorSpeedLimit(){
-	sensor.overrideSpeedLimit(10);
-	Assert.assertEquals(10,sensor.getSpeedLimit());
-}
+	@Test
+	public void SpeedLimitMinimum(){
+    	sensor.overrideSpeedLimit(-1);
+    	verify(user,times(1)).setAlarmState(true);
+	}
+
+	@Test
+	public void SpeedLimitMaximum(){
+    	sensor.overrideSpeedLimit(501);
+    	verify(user,times(1)).setAlarmState(true);
+	}
+
+	@Test
+	public void referencerelation(){
+		when(controller.getReferenceSpeed()).thenReturn(31);
+		sensor.overrideSpeedLimit(15);
+		verify(user,times(1)).setAlarmState(true);
+	}
+
+	@Test
+	public void notalarm(){
+		when(controller.getReferenceSpeed()).thenReturn(29);
+		sensor.overrideSpeedLimit(15);
+		verify(user,times(1)).setAlarmState(false);
+	}
+
 }
